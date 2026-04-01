@@ -30,5 +30,5 @@ class VectorStoreFactory:
       )
     
 
-image_embedding_vector_store = VectorStoreFactory(image_embeddings_client, VECTOR_DB.IMAGES_COLLECTION_NAME.value)
-text_embedding_vector_store = VectorStoreFactory(embeddings_client, VECTOR_DB.SUBTITLES_COLLECTION_NAME.value)
+image_embedding_vector_store = VectorStoreFactory(image_embeddings_client, VECTOR_DB.IMAGES_COLLECTION_NAME.value).get_repository()
+text_embedding_vector_store = VectorStoreFactory(embeddings_client, VECTOR_DB.SUBTITLES_COLLECTION_NAME.value).get_repository()

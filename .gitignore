@@ -9,6 +9,9 @@ wheels/
 # Virtual environments
 .venv
 examples
+qdrant_storage
+vector_db_stores
 
 app/static
 .env
+cookies.txt

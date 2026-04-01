@@ -7,6 +7,7 @@ services:
     volumes:
       - .:/app
       - /app/.venv
+      - ./cookies.txt:/app/cookies.txt
       - ./vector_db_stores:/app/vector_db_stores
     environment:
       - WORKING_DIR=/app
