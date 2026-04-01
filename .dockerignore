@@ -1,0 +1,5 @@
+venv/
+examples/
+temp/
+logs/
+app/static

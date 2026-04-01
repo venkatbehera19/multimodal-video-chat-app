@@ -1,0 +1,40 @@
+services:
+  video-chat-api:
+    build: .
+    container_name: video_chat_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /app/.venv
+      - ./vector_db_stores:/app/vector_db_stores
+    environment:
+      - WORKING_DIR=/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      qdrant:
+        condition: service_started
+      redis:
+        condition: service_healthy
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-video-chat
+    environment:
+      - PYTHONWARNINGS=ignore
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis-video-chat
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5

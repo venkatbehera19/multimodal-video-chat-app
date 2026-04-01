@@ -1,0 +1,8 @@
+2026-03-30 19:02:11,781 | INFO | fastapi_app | 127.0.0.1 - "GET /docs" 200 (0.37ms)
+2026-03-30 19:02:11,853 | INFO | fastapi_app | 127.0.0.1 - "GET /openapi.json" 200 (0.67ms)
+2026-03-30 15:03:07,582 | INFO | fastapi_app | 172.19.0.1 - "GET /docs" 200 (0.50ms)
+2026-03-30 15:03:07,672 | INFO | fastapi_app | 172.19.0.1 - "GET /openapi.json" 200 (0.87ms)
+2026-03-30 15:07:59,449 | INFO | fastapi_app | 172.19.0.1 - "GET /docs" 200 (0.61ms)
+2026-03-30 15:07:59,514 | INFO | fastapi_app | 172.19.0.1 - "GET /openapi.json" 200 (1.34ms)
+2026-03-30 15:41:03,549 | INFO | fastapi_app | 172.19.0.1 - "GET /docs" 200 (0.58ms)
+2026-03-30 15:41:03,607 | INFO | fastapi_app | 172.19.0.1 - "GET /openapi.json" 200 (1.79ms)
