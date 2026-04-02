@@ -78,6 +78,31 @@ class QdrantRepository:
     """Performs standard Similarity Search (Dense Vector Search)"""
     results = self.vector_store.similarity_search(query, k=k)
     return results
+  
+  def search_images(self, query: str, k: int = 2, video_id: str = None):
+    """"""
+    query_vector = self.embeddings.embed_query(query)
+    query_filter = None
+
+    # metadata filtering 
+    if video_id:
+      query_filter = models.Filter(
+        must=[
+          models.FieldCondition(
+            key="video_id", 
+            match=models.MatchValue(value=video_id)
+          )
+        ]
+      )
+
+    results = self.client.query_points(
+      collection_name=self.collection_name,
+      query=query_vector,
+      query_filter=query_filter,
+      limit=k,
+      with_payload=True 
+    ).points
+    return results
 
   def file_exists(self, video_id: str) -> bool:
     """Queries Qdrant metadata to check if a file is already processed."""

@@ -1,0 +1,1996 @@
+2026-04-01 03:44:23,477 | INFO | fastapi_app | 172.19.0.1 - "GET /docs" 200 (0.69ms)
+2026-04-01 03:44:23,632 | INFO | fastapi_app | 172.19.0.1 - "GET /openapi.json" 200 (1.59ms)
+2026-04-01 07:42:24,277 | INFO | fastapi_app | Loading embedding model
+2026-04-01 07:42:47,809 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 07:46:04,068 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=ezdIOLbUSWg. Ingestion Service... download_file
+2026-04-01 07:46:05,354 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] ezdIOLbUSWg: Unable to download API page: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010) (caused by CertificateVerifyError('[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+2026-04-01 07:46:05,354 | INFO | fastapi_app | Downloaded File None. Ingestion Service...
+2026-04-01 07:46:06,450 | ERROR | fastapi_app | 172.19.0.1 - "POST /upload" FAILED (2461.80ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 07:46:06,454 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 09:27:21,350 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:27:39,771 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:27:44,438 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:27:52,559 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:27:59,218 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=ezdIOLbUSWg. Ingestion Service... download_file
+2026-04-01 09:28:00,486 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] ezdIOLbUSWg: Unable to download API page: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010) (caused by CertificateVerifyError('[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+2026-04-01 09:28:00,486 | INFO | fastapi_app | Downloaded File None. Ingestion Service...
+2026-04-01 09:28:01,867 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] ezdIOLbUSWg: Unable to download API page: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010) (caused by CertificateVerifyError('[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U .....
+2026-04-01 09:28:01,868 | ERROR | fastapi_app | 172.19.0.1 - "POST /upload" FAILED (2730.02ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 09:28:01,872 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 09:31:40,083 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=YXgBYdjGKQM. Ingestion Service... download_file
+2026-04-01 09:31:42,166 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/YXgBYdjGKQM.mp4. Ingestion Service...
+2026-04-01 09:31:44,954 | INFO | fastapi_app | Error while fetching the metadata of video link cannot access local variable 'e' where it is not associated with a value .....
+2026-04-01 09:31:44,955 | ERROR | fastapi_app | 172.19.0.1 - "POST /upload" FAILED (4917.36ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 09:31:44,956 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 09:33:45,343 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:33:54,880 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:33:59,543 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=YXgBYdjGKQM. Ingestion Service... download_file
+2026-04-01 09:34:01,801 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/YXgBYdjGKQM.mp4. Ingestion Service...
+2026-04-01 09:34:03,764 | INFO | fastapi_app | English subtitles found for YXgBYdjGKQM. Downloading...
+2026-04-01 09:34:06,165 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 09:34:14,775 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/YXgBYdjGKQM
+2026-04-01 09:34:14,776 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/YXgBYdjGKQM', 'count': 236, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 09:34:14,776 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/YXgBYdjGKQM...
+2026-04-01 09:34:36,643 | INFO | fastapi_app | 172.19.0.1 - "POST /upload" 201 (37191.59ms)
+2026-04-01 09:43:56,250 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:44:06,155 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:45:34,156 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:45:44,650 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:56:16,569 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:56:26,480 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:57:52,601 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:58:02,328 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 09:58:06,750 | INFO | fastapi_app | Loading embedding model
+2026-04-01 09:58:13,281 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:01:11,858 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:01:22,924 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:12:00,995 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:12:08,474 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:13:02,611 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:13:10,108 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:14:13,347 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:14:22,816 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:29:55,891 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:30:39,565 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:32:39,289 | INFO | fastapi_app | Loading embedding model
+2026-04-01 10:32:46,942 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 10:35:40,444 | INFO | fastapi_app | 172.19.0.1 - "GET /docs" 200 (0.90ms)
+2026-04-01 10:35:40,632 | INFO | fastapi_app | 172.19.0.1 - "GET /openapi.json" 200 (1.76ms)
+2026-04-01 11:51:14,051 | INFO | fastapi_app | Loading embedding model
+2026-04-01 11:51:36,594 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 11:54:02,916 | INFO | fastapi_app | 🚀 Application started
+2026-04-01 11:54:02,917 | INFO | fastapi_app | 172.18.0.1 - "GET /" 200 (3.56ms)
+2026-04-01 11:54:02,954 | INFO | fastapi_app | 172.18.0.1 - "GET /favicon.ico" 404 (0.60ms)
+2026-04-01 11:54:07,239 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.69ms)
+2026-04-01 11:54:07,695 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (3.32ms)
+2026-04-01 11:57:17,267 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=YXgBYdjGKQM. Ingestion Service... download_file
+2026-04-01 11:57:18,716 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] YXgBYdjGKQM: Unable to download API page: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010) (caused by CertificateVerifyError('[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U
+2026-04-01 11:57:18,716 | INFO | fastapi_app | Downloaded File None. Ingestion Service...
+2026-04-01 11:57:28,748 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] YXgBYdjGKQM: Unable to download API page: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010) (caused by CertificateVerifyError('[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')); please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U .....
+2026-04-01 11:57:28,749 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (11627.60ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 11:57:28,753 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 209, in process
+    video_id = meta['video_id']
+               ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 12:06:17,835 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=YXgBYdjGKQM. Ingestion Service... download_file
+2026-04-01 12:09:13,912 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/YXgBYdjGKQM.mp4. Ingestion Service...
+2026-04-01 12:09:29,207 | INFO | fastapi_app | English subtitles found for YXgBYdjGKQM. Downloading...
+2026-04-01 12:09:36,577 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 12:09:41,279 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/YXgBYdjGKQM
+2026-04-01 12:09:41,279 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/YXgBYdjGKQM', 'count': 236, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 12:09:41,280 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/YXgBYdjGKQM...
+2026-04-01 12:10:37,261 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (259526.93ms)
+2026-04-01 12:17:18,283 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:17:26,855 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:18:07,438 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 12:20:35,661 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 12:20:37,289 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 12:20:40,831 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 12:21:20,525 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 12:21:20,526 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 12:21:20,526 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 12:22:34,792 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (267462.86ms)
+2026-04-01 12:29:41,005 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:29:48,730 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:30:44,960 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:30:52,523 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:31:08,866 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:31:16,585 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:32:05,910 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:32:12,932 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:36:43,247 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:36:51,521 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:41:27,032 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:41:34,753 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:44:03,844 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:44:11,363 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:44:14,698 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 12:44:14,760 | INFO | fastapi_app | Hybrid collection 'video_frames' created.
+2026-04-01 12:44:17,973 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:44:25,256 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:44:28,336 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 12:46:58,132 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 12:47:00,996 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 12:47:02,942 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 12:47:06,014 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 12:47:44,976 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 12:47:44,977 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 12:47:44,977 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 12:48:59,741 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 12:48:59,741 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 12:48:59,742 | INFO | fastapi_app | Failed to push vectors to Qdrant: 'timestamp'
+2026-04-01 12:49:00,040 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (122057.25ms)
+2026-04-01 12:53:47,252 | INFO | fastapi_app | Loading embedding model
+2026-04-01 12:53:54,803 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 12:53:57,846 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 12:54:04,717 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 12:54:07,018 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 12:54:13,728 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 12:54:16,233 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 12:54:55,380 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 12:54:55,381 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 12:54:55,381 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 12:56:07,412 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 12:56:07,412 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 12:56:07,529 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 12:56:07,530 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 12:56:07,682 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (123117.89ms)
+2026-04-01 15:01:21,942 | INFO | fastapi_app | Loading embedding model
+2026-04-01 15:01:55,071 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 15:04:29,782 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 15:04:30,117 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 15:04:30,144 | INFO | fastapi_app | Hybrid collection 'video_subtitles' created.
+2026-04-01 15:22:59,435 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.34ms)
+2026-04-01 15:22:59,636 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (3.95ms)
+2026-04-01 15:25:05,982 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 15:25:07,824 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 15:25:09,274 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 15:25:11,294 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 15:25:58,299 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 15:25:58,300 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 15:25:58,300 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 15:26:50,759 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 15:26:50,759 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 15:26:50,948 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 15:26:50,949 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 15:26:50,949 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 15:26:50,949 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (105061.37ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 303, in process
+    subtitle_docs = self.parse_vtt_to_documents(caption_path, video_id)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: IngestionService.parse_vtt_to_documents() takes 2 positional arguments but 3 were given
+2026-04-01 15:26:50,952 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 303, in process
+    subtitle_docs = self.parse_vtt_to_documents(caption_path, video_id)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: IngestionService.parse_vtt_to_documents() takes 2 positional arguments but 3 were given
+2026-04-01 15:46:35,097 | INFO | fastapi_app | Loading embedding model
+2026-04-01 15:46:41,737 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 15:46:43,692 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 15:46:43,933 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 15:51:28,761 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 15:51:30,434 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 15:51:31,772 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 15:51:33,518 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 15:52:19,278 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 15:52:19,279 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 15:52:19,279 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 15:53:27,886 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 15:53:27,887 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 15:53:28,188 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 15:53:28,189 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 15:53:28,189 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 15:53:28,199 | INFO | fastapi_app | Pushing 218 text chunks to Qdrant...
+2026-04-01 15:53:28,199 | INFO | fastapi_app | Adding 218 documents to video_subtitles...
+2026-04-01 15:53:29,223 | INFO | fastapi_app | Batch upload complete.
+2026-04-01 15:53:29,223 | INFO | fastapi_app | Subtitles successfully indexed.
+2026-04-01 15:53:29,555 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (120857.14ms)
+2026-04-01 15:55:00,051 | INFO | fastapi_app | 172.18.0.1 - "GET /.well-known/appspecific/com.chrome.devtools.json" 404 (0.63ms)
+2026-04-01 16:12:26,957 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:12:35,973 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:12:38,515 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:12:38,946 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:18:48,878 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:18:55,744 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:18:59,182 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:18:59,644 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:19:04,410 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:19:11,544 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:19:14,395 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:19:14,823 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:23:57,867 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:24:05,329 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:24:07,537 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:24:08,272 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:34:33,221 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:34:40,102 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:34:42,714 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:34:43,114 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:41:03,347 | INFO | fastapi_app | Loading embedding model
+2026-04-01 16:41:11,169 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 16:41:14,151 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:41:14,635 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 16:50:26,722 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 16:50:28,087 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 16:50:29,551 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 16:50:31,552 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 16:51:12,195 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 16:51:12,195 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 16:51:12,196 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 16:52:25,751 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 16:52:25,785 | INFO | fastapi_app | VIDEO gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 16:52:25,785 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 16:52:25,792 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 16:52:26,104 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (119539.13ms)
+2026-04-01 17:04:39,089 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:04:46,559 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:04:49,991 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:04:50,198 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:05:16,118 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:05:23,017 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:05:25,508 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:05:26,212 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:07:31,893 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:07:38,875 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:07:41,739 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:07:42,131 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:08:00,891 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 17:08:02,403 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 17:08:04,130 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 17:08:06,168 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 17:08:45,486 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 17:08:45,487 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 17:08:45,487 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 17:10:00,621 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 17:10:00,627 | ERROR | fastapi_app | Error checking existence in video_frames: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `video_frames` doesn\'t exist!"},"time":6.5e-6}'
+2026-04-01 17:10:00,627 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 17:10:00,713 | INFO | fastapi_app | Failed to push vectors to Qdrant: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `video_frames` doesn\'t exist!"},"time":0.000064772}'
+2026-04-01 17:10:00,721 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (119983.20ms)
+2026-04-01 17:10:40,526 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:10:47,321 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:10:49,841 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:10:49,899 | INFO | fastapi_app | Hybrid collection 'video_frames' created.
+2026-04-01 17:10:50,262 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:11:12,990 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.58ms)
+2026-04-01 17:11:13,056 | INFO | fastapi_app | 172.18.0.1 - "GET /.well-known/appspecific/com.chrome.devtools.json" 404 (0.70ms)
+2026-04-01 17:11:13,249 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (2.41ms)
+2026-04-01 17:11:18,758 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 17:11:20,163 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 17:11:21,492 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 17:11:23,207 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 17:12:05,173 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 17:12:05,174 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 17:12:05,174 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 17:13:01,283 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 17:13:01,300 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 17:13:01,467 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 17:13:01,468 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 17:13:01,469 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 17:13:01,474 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 17:13:01,995 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (103387.39ms)
+2026-04-01 17:21:02,719 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:21:09,918 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:21:12,316 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:21:13,088 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:23:02,843 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:23:09,415 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:23:11,194 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:23:11,449 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:23:44,796 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. Ingestion Service... download_file
+2026-04-01 17:23:46,071 | INFO | fastapi_app | Downloaded File /app/app/static/upload/videos/gDF0QRdI_3o.mp4. Ingestion Service...
+2026-04-01 17:23:46,108 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 17:23:47,561 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 17:23:47,564 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 17:23:49,262 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 17:24:35,433 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 17:24:35,434 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 17:24:35,434 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 17:25:35,738 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 17:25:35,746 | INFO | fastapi_app | VIDEO gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 17:25:35,746 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 17:25:35,752 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 17:25:36,263 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (111533.02ms)
+2026-04-01 17:25:39,261 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:25:45,990 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:25:48,230 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:25:48,553 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:29:18,105 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:29:25,142 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:29:27,359 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:29:27,941 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:34:00,747 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:34:07,478 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:34:09,202 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:34:09,449 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:34:31,257 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:34:37,979 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:34:39,719 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:34:40,010 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:34:54,126 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:35:04,824 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:35:06,748 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:35:06,977 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:39:01,109 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:39:07,937 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:39:10,050 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:39:10,313 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:42:23,059 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=VYeufIxENFU.
+2026-04-01 17:42:29,518 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=VYeufIxENFU. and stored in this /app/app/static/upload/videos/VYeufIxENFU.mp4 location
+2026-04-01 17:42:29,558 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 17:42:30,866 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 17:42:30,867 | INFO | fastapi_app | English subtitles found for VYeufIxENFU. Downloading...
+2026-04-01 17:42:32,656 | INFO | fastapi_app | LOgging for video extractions
+2026-04-01 17:42:48,411 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/VYeufIxENFU
+2026-04-01 17:42:48,412 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/VYeufIxENFU', 'count': 321, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 17:42:48,412 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/VYeufIxENFU...
+2026-04-01 17:43:29,105 | INFO | fastapi_app | Good for embeddings 321...
+2026-04-01 17:43:29,114 | INFO | fastapi_app | Preparing to push 321 image vectors to video_frames
+2026-04-01 17:43:29,305 | INFO | fastapi_app | Successfully pushed 321 points to Qdrant.
+2026-04-01 17:43:29,306 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 17:43:29,306 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/VYeufIxENFU.en.vtt...
+2026-04-01 17:43:29,320 | INFO | fastapi_app | Pushing 248 text chunks to Qdrant...
+2026-04-01 17:43:29,320 | INFO | fastapi_app | Adding 248 documents to video_subtitles...
+2026-04-01 17:43:30,393 | INFO | fastapi_app | Batch upload complete.
+2026-04-01 17:43:30,393 | INFO | fastapi_app | Subtitles successfully indexed.
+2026-04-01 17:43:30,761 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (67703.18ms)
+2026-04-01 17:43:38,547 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:43:45,347 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:43:47,109 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:43:47,345 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:43:49,881 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:43:56,712 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:43:58,718 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:43:58,793 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:47:23,277 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:47:29,915 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:47:31,678 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:47:31,948 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:48:16,009 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:48:22,859 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:48:24,722 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:48:25,002 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:49:41,149 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:49:48,059 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:49:50,056 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:49:50,307 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:52:59,498 | INFO | fastapi_app | Loading embedding model
+2026-04-01 17:53:06,413 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 17:53:08,314 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 17:53:08,408 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:02:34,347 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:02:41,188 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:02:43,464 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:02:43,511 | INFO | fastapi_app | Hybrid collection 'video_frames' created.
+2026-04-01 18:02:43,765 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:03:33,034 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:03:40,678 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:03:42,772 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:03:43,037 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:04:12,352 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:04:18,870 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:04:20,605 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:04:20,854 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:04:51,844 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.37ms)
+2026-04-01 18:04:51,942 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (1.69ms)
+2026-04-01 18:04:57,360 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=VYeufIxENFU.
+2026-04-01 18:04:59,370 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] VYeufIxENFU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 18:04:59,407 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:05:01,057 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] VYeufIxENFU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies .....
+2026-04-01 18:05:01,058 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (3700.16ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:05:01,065 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:05:37,125 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:05:39,939 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 18:05:39,978 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:05:41,512 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies .....
+2026-04-01 18:05:41,513 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (4388.78ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:05:41,515 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:06:32,711 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:06:34,845 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 18:06:34,884 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:06:36,762 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies .....
+2026-04-01 18:06:36,764 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (4053.65ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:06:36,765 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:08:10,999 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:08:17,353 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:08:19,235 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:08:20,159 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:08:43,144 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.58ms)
+2026-04-01 18:08:43,321 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (1.57ms)
+2026-04-01 18:08:56,116 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:08:57,819 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 18:08:57,871 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:08:59,482 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies .....
+2026-04-01 18:08:59,482 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (3367.28ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:08:59,484 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 152, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:33:35,905 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:33:42,222 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:33:44,146 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:33:44,542 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:33:56,312 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:34:31,681 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:37:35,762 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:37:35,823 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:40:50,774 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.26ms)
+2026-04-01 18:40:50,916 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (1.83ms)
+2026-04-01 18:41:00,106 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:41:02,051 | INFO | fastapi_app | Error during audio extraction: ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-04-01 18:41:02,089 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:41:03,671 | INFO | fastapi_app | Error while fetching the metadata of video link ERROR: [youtube] gDF0QRdI_3o: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies .....
+2026-04-01 18:41:03,672 | ERROR | fastapi_app | 172.18.0.1 - "POST /upload" FAILED (3567.41ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 153, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:41:03,677 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/ingestion_routes.py", line 18, in ingest_link
+    response = await ingestion_service.process()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/services/ingestion_service.py", line 153, in process
+    video_id        = meta['video_id']
+                      ~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2026-04-01 18:41:52,652 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:42:28,259 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:45:20,645 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:45:20,736 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:49:47,211 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:49:54,198 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:49:56,023 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:49:56,286 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:50:53,378 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:51:00,553 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:51:02,353 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:51:02,588 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:51:10,660 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:51:11,867 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. and stored in this /app/app/static/upload/videos/gDF0QRdI_3o.mp4 location
+2026-04-01 18:51:11,905 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:51:13,008 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 18:51:13,011 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 18:51:14,610 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o started
+2026-04-01 18:52:00,514 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 18:52:00,514 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 18:52:00,514 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 18:52:00,801 | ERROR | fastapi_app | Failed to embed frame /app/app/static/upload/frames_dir/gDF0QRdI_3o/frame_0001.jpg: extract_timestamp() missing 1 required positional argument: 'frame_path'
+2026-04-01 18:52:00,801 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 18:52:00,817 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 18:52:00,818 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (50159.04ms)
+2026-04-01 18:55:27,386 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:55:34,174 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:55:36,149 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:55:36,249 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:55:48,735 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 18:55:49,947 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. and stored in this /app/app/static/upload/videos/gDF0QRdI_3o.mp4 location
+2026-04-01 18:55:49,986 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 18:55:51,076 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 18:55:51,079 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 18:55:52,513 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o started
+2026-04-01 18:56:37,734 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 18:56:37,735 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 18:56:37,735 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 18:57:31,529 | INFO | fastapi_app | Good for embeddings 512...
+2026-04-01 18:57:31,537 | INFO | fastapi_app | Preparing to push 512 image vectors to video_frames
+2026-04-01 18:57:31,537 | INFO | fastapi_app | Failed to push vectors to Qdrant: 'float' object is not subscriptable
+2026-04-01 18:57:31,538 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (102804.32ms)
+2026-04-01 18:59:33,643 | INFO | fastapi_app | Loading embedding model
+2026-04-01 18:59:40,253 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 18:59:42,153 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 18:59:42,483 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:01:03,148 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 19:01:04,310 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. and stored in this /app/app/static/upload/videos/gDF0QRdI_3o.mp4 location
+2026-04-01 19:01:04,349 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:01:05,552 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:01:05,554 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 19:01:06,910 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o started
+2026-04-01 19:01:51,139 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 19:01:51,140 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 19:01:51,140 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 19:02:44,927 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 19:02:44,931 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 19:02:45,126 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 19:02:45,128 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 19:02:45,128 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 19:02:45,132 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 19:02:45,701 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (102553.29ms)
+2026-04-01 19:06:30,030 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:06:36,710 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:06:38,765 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:06:39,045 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:06:50,335 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:06:57,191 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:06:58,979 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:06:59,011 | INFO | fastapi_app | Hybrid collection 'video_frames' created.
+2026-04-01 19:06:59,384 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:07:20,282 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 19:07:21,468 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. and stored in this /app/app/static/upload/videos/gDF0QRdI_3o.mp4 location
+2026-04-01 19:07:21,507 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:07:22,448 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:07:22,450 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 19:07:23,830 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o started
+2026-04-01 19:08:08,329 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 19:08:08,330 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 19:08:08,330 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 19:09:00,380 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 19:09:00,386 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 19:09:00,536 | INFO | fastapi_app | Failed to push vectors to Qdrant: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Payload error: JSON payload (38334277 bytes) is larger than allowed (limit: 33554432 bytes)."},"time":0.0}'
+2026-04-01 19:09:00,541 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (100259.89ms)
+2026-04-01 19:11:05,537 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:11:12,276 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:11:13,995 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:11:14,235 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:11:36,285 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o.
+2026-04-01 19:11:37,406 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=gDF0QRdI_3o. and stored in this /app/app/static/upload/videos/gDF0QRdI_3o.mp4 location
+2026-04-01 19:11:37,445 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:11:38,703 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:11:38,704 | INFO | fastapi_app | English subtitles found for gDF0QRdI_3o. Downloading...
+2026-04-01 19:11:40,248 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o started
+2026-04-01 19:12:24,605 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/gDF0QRdI_3o
+2026-04-01 19:12:24,605 | INFO | fastapi_app | RESULT {'folder': '/app/app/static/upload/frames_dir/gDF0QRdI_3o', 'count': 307, 'sample_image': 'frame_0001.jpg'}. Will rely on Audio/Vision.
+2026-04-01 19:12:24,605 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/gDF0QRdI_3o...
+2026-04-01 19:13:16,240 | INFO | fastapi_app | Good for embeddings 307...
+2026-04-01 19:13:16,245 | INFO | fastapi_app | Preparing to push 307 image vectors to video_frames
+2026-04-01 19:13:17,224 | INFO | fastapi_app | Successfully pushed 307 points to Qdrant.
+2026-04-01 19:13:17,225 | INFO | fastapi_app | Image embeddings successfully indexed in Qdrant.
+2026-04-01 19:13:17,225 | INFO | fastapi_app | Parsing subtitles from /app/app/static/upload/audio/gDF0QRdI_3o.en.vtt...
+2026-04-01 19:13:17,228 | INFO | fastapi_app | SUBTITLES gDF0QRdI_3o subtitles already exist. Skipping push......................
+2026-04-01 19:13:17,723 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (101439.94ms)
+2026-04-01 19:14:44,687 | INFO | fastapi_app | 172.18.0.1 - "GET /.well-known/appspecific/com.chrome.devtools.json" 404 (0.39ms)
+2026-04-01 19:15:44,649 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:15:51,527 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:15:53,234 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:15:53,503 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:19:39,385 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:19:46,125 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:19:47,895 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:19:48,144 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:19:54,792 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:19:55,903 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:19:55,904 | INFO | fastapi_app | Starting processing for Video ID: gDF0QRdI_3o
+2026-04-01 19:19:55,915 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (1185.67ms)
+2026-04-01 19:20:07,512 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.33ms)
+2026-04-01 19:20:07,542 | INFO | fastapi_app | 172.18.0.1 - "GET /.well-known/appspecific/com.chrome.devtools.json" 404 (0.30ms)
+2026-04-01 19:20:07,777 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (1.72ms)
+2026-04-01 19:20:30,255 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:20:31,453 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:20:31,455 | INFO | fastapi_app | Starting processing for Video ID: gDF0QRdI_3o
+2026-04-01 19:20:31,466 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (1256.68ms)
+2026-04-01 19:22:34,001 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:22:40,617 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:22:42,807 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:22:43,104 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:23:05,646 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:23:12,366 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:23:14,153 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:23:14,410 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:23:37,281 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:23:38,391 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:23:38,392 | INFO | fastapi_app | Starting processing for Video ID: gDF0QRdI_3o
+2026-04-01 19:23:38,403 | INFO | fastapi_app | Video gDF0QRdI_3o fully indexed. Skipping re-processing.
+2026-04-01 19:23:38,404 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (1181.39ms)
+2026-04-01 19:30:16,812 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:30:23,577 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:30:25,328 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:30:25,616 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:31:02,394 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:31:03,442 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:31:03,444 | INFO | fastapi_app | Starting processing for Video ID: oCVqSV4JxUU
+2026-04-01 19:31:03,463 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=oCVqSV4JxUU.
+2026-04-01 19:31:24,560 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=oCVqSV4JxUU. and stored in this /app/app/static/upload/videos/oCVqSV4JxUU.mp4 location
+2026-04-01 19:31:24,562 | INFO | fastapi_app | English subtitles found for oCVqSV4JxUU. Downloading...
+2026-04-01 19:31:26,059 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/oCVqSV4JxUU started
+2026-04-01 19:32:22,421 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/oCVqSV4JxUU
+2026-04-01 19:32:22,422 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/oCVqSV4JxUU...
+2026-04-01 19:33:25,688 | INFO | fastapi_app | Preparing to push 366 image vectors to video_frames
+2026-04-01 19:33:26,887 | INFO | fastapi_app | Successfully pushed 366 points to Qdrant.
+2026-04-01 19:33:26,888 | INFO | fastapi_app | Image embeddings successfully indexed.
+2026-04-01 19:33:26,904 | INFO | fastapi_app | Adding 254 documents to video_subtitles...
+2026-04-01 19:33:27,865 | INFO | fastapi_app | Batch upload complete.
+2026-04-01 19:33:27,866 | INFO | fastapi_app | Subtitles successfully indexed.
+2026-04-01 19:33:27,870 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (145535.89ms)
+2026-04-01 19:38:17,157 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:38:23,682 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:38:25,688 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:38:26,025 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:39:04,284 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:39:10,535 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:39:12,456 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:39:12,518 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:39:31,151 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:39:32,085 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:39:32,086 | INFO | fastapi_app | Starting processing for Video ID: oCVqSV4JxUU
+2026-04-01 19:39:32,094 | INFO | fastapi_app | Video oCVqSV4JxUU fully indexed. Skipping re-processing.
+2026-04-01 19:39:32,095 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (1008.21ms)
+2026-04-01 19:40:14,681 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:40:15,648 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:40:15,650 | INFO | fastapi_app | Starting processing for Video ID: EAT5a6pAC7M
+2026-04-01 19:40:15,682 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=EAT5a6pAC7M.
+2026-04-01 19:40:43,300 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=EAT5a6pAC7M. and stored in this /app/app/static/upload/videos/EAT5a6pAC7M.mp4 location
+2026-04-01 19:40:43,301 | INFO | fastapi_app | English subtitles found for EAT5a6pAC7M. Downloading...
+2026-04-01 19:40:44,680 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/EAT5a6pAC7M started
+2026-04-01 19:41:37,086 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/EAT5a6pAC7M
+2026-04-01 19:41:37,087 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/EAT5a6pAC7M...
+2026-04-01 19:42:46,349 | INFO | fastapi_app | Preparing to push 397 image vectors to video_frames
+2026-04-01 19:42:47,506 | INFO | fastapi_app | Successfully pushed 397 points to Qdrant.
+2026-04-01 19:42:47,507 | INFO | fastapi_app | Image embeddings successfully indexed.
+2026-04-01 19:42:47,517 | INFO | fastapi_app | Adding 284 documents to video_subtitles...
+2026-04-01 19:42:48,639 | INFO | fastapi_app | Batch upload complete.
+2026-04-01 19:42:48,640 | INFO | fastapi_app | Subtitles successfully indexed.
+2026-04-01 19:42:48,640 | INFO | fastapi_app | Starting cleanup of local temporary assets...
+2026-04-01 19:42:48,640 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,640 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,640 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,641 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,641 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,641 | ERROR | fastapi_app | Failed to delete file /: [Errno 21] Is a directory: '/'
+2026-04-01 19:42:48,641 | INFO | fastapi_app | Cleanup complete.
+2026-04-01 19:42:48,645 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (154002.45ms)
+2026-04-01 19:43:54,173 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:44:00,756 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:44:02,497 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:44:02,758 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:45:11,718 | INFO | fastapi_app |  fetching the metadata of video link .....
+2026-04-01 19:45:12,774 | INFO | fastapi_app | fetched the metadata of video link .....
+2026-04-01 19:45:12,776 | INFO | fastapi_app | Starting processing for Video ID: PjygDRNSkkg
+2026-04-01 19:45:12,826 | INFO | fastapi_app | Downloading the video from  https://www.youtube.com/watch?v=PjygDRNSkkg.
+2026-04-01 19:45:38,773 | INFO | fastapi_app | Downloaded the video from  https://www.youtube.com/watch?v=PjygDRNSkkg. and stored in this /app/app/static/upload/videos/PjygDRNSkkg.mp4 location
+2026-04-01 19:45:38,775 | INFO | fastapi_app | English subtitles found for PjygDRNSkkg. Downloading...
+2026-04-01 19:45:40,205 | INFO | fastapi_app | Extraction from video to frames to /app/app/static/upload/frames_dir/PjygDRNSkkg started
+2026-04-01 19:46:15,016 | INFO | fastapi_app | Successfully extracted frames to /app/app/static/upload/frames_dir/PjygDRNSkkg
+2026-04-01 19:46:15,017 | INFO | fastapi_app | Generating CLIP embeddings for frames in /app/app/static/upload/frames_dir/PjygDRNSkkg...
+2026-04-01 19:47:10,565 | INFO | fastapi_app | Preparing to push 315 image vectors to video_frames
+2026-04-01 19:47:11,556 | INFO | fastapi_app | Successfully pushed 315 points to Qdrant.
+2026-04-01 19:47:11,557 | INFO | fastapi_app | Image embeddings successfully indexed.
+2026-04-01 19:47:11,573 | INFO | fastapi_app | Adding 220 documents to video_subtitles...
+2026-04-01 19:47:12,468 | INFO | fastapi_app | Batch upload complete.
+2026-04-01 19:47:12,468 | INFO | fastapi_app | Subtitles successfully indexed.
+2026-04-01 19:47:12,468 | INFO | fastapi_app | Starting cleanup of local temporary assets...
+2026-04-01 19:47:12,488 | INFO | fastapi_app | Cleanup complete.
+2026-04-01 19:47:12,492 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (120832.21ms)
+2026-04-01 19:56:54,601 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:57:01,576 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:57:03,487 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:57:03,590 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:57:06,079 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:57:12,534 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:57:14,324 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:57:14,576 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:58:27,388 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:58:34,353 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:58:36,096 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:58:36,312 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:58:38,926 | INFO | fastapi_app | Loading embedding model
+2026-04-01 19:58:44,908 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 19:58:46,713 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 19:58:48,113 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:00:01,780 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:00:08,461 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:00:10,539 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:00:10,811 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:01:17,767 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:01:24,039 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:01:26,010 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:01:26,312 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:16:30,608 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:17:06,044 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:19:57,923 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:19:58,029 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:37:00,209 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:37:35,877 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:40:11,347 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:40:11,445 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:42:00,932 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.41ms)
+2026-04-01 20:42:01,078 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (4.38ms)
+2026-04-01 20:42:27,572 | ERROR | fastapi_app | 172.18.0.1 - "GET /chat" FAILED (4.16ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 25, in chat
+    history = redis_history.get_history(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RedisHistory' object has no attribute 'get_history'
+2026-04-01 20:42:27,576 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 25, in chat
+    history = redis_history.get_history(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RedisHistory' object has no attribute 'get_history'
+2026-04-01 20:43:01,823 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:43:08,674 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:43:10,754 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:43:11,065 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:43:21,600 | ERROR | fastapi_app | 172.18.0.1 - "GET /chat" FAILED (101.53ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 32, in chat
+    f"Frame at {res.metadata['timestamp']} shows: {res.metadata.get('description', 'visual match')}"
+               ~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'timestamp'
+2026-04-01 20:43:21,602 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 32, in chat
+    f"Frame at {res.metadata['timestamp']} shows: {res.metadata.get('description', 'visual match')}"
+               ~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'timestamp'
+2026-04-01 20:45:34,298 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:45:41,357 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:45:43,308 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:45:43,590 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:45:47,922 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (101.93ms)
+2026-04-01 20:46:49,223 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:46:55,401 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:46:57,345 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:46:57,572 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:47:01,089 | INFO | fastapi_app | Loading embedding model
+2026-04-01 20:47:11,776 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-01 20:47:13,578 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:47:13,802 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-01 20:47:50,316 | ERROR | fastapi_app | 172.18.0.1 - "GET /chat" FAILED (0.84ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 25, in chat
+    history = redis_history.get_history(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RedisHistory' object has no attribute 'get_history'
+2026-04-01 20:47:50,318 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 674, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 328, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/routes/chat_routes.py", line 25, in chat
+    history = redis_history.get_history(session_id)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'RedisHistory' object has no attribute 'get_history'
