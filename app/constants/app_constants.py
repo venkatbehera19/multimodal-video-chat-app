@@ -41,3 +41,6 @@ class VECTOR_DB(Enum):
 
   SPARSE = "sparse"
   DENSE = "dense"
+
+  MULTIMODAL_IMAGE_COLLECTION_NAME = "image_collection"
+  MULTIMODAL_TEXT_COLLECTION_NAME = "text_collection"

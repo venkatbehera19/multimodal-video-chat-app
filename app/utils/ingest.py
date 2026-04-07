@@ -61,22 +61,45 @@ def download_file(video_dir: str, url: str, cookies_path: str):
     Return:
         location of the file that saved
     """
+
     ydl_opts = {
-      'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
-      'outtmpl': f'{video_dir}/%(id)s.%(ext)s',
-      'noplaylist': True,
-      'quiet': False,
-      'cookiefile': cookies_path if os.path.exists(cookies_path) else None
+        'format': 'best[ext=mp4]', 
+        'outtmpl': os.path.join(video_dir, '%(id)s.%(ext)s'),
+        'noplaylist': True,
+        'quiet': False,
+
+        'writesubtitles': True,
+        'writeautomaticsub': True,
+        'subtitleslangs': ['en'], 
+        'subtitlesformat': 'srt',
+        'cookiefile': cookies_path if os.path.exists(cookies_path) else None
     }
 
     try:
         logger.info(f"Downloading the video from  {url}.")
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=True)
-            filename = ydl.prepare_filename(info)
-            logger.info(f"Downloaded the video from  {url}. and stored in this {filename} location")
-            return filename
-      
+
+            video_file = ydl.prepare_filename(info)
+            video_id = info.get("id")
+
+            subtitle_file = None
+
+            for file in os.listdir(video_dir):
+                if file.startswith(video_id) and file.endswith(".srt"):
+                    subtitle_file = os.path.join(video_dir, file)
+                    break
+            logger.info(f"Downloaded video: {video_file}")
+            if subtitle_file:
+                print(f"Downloaded subtitles: {subtitle_file}")
+            else:
+                print("No subtitles available")
+            return {
+                "video": video_file,
+                "subtitles": subtitle_file,
+                "meta": info
+            }
+
     except Exception as e:
       logger.info(f"Error during audio extraction: {e}")
       return None

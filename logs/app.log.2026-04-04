@@ -1,0 +1,8 @@
+2026-04-04 08:06:22,733 | INFO | fastapi_app | Loading embedding model
+2026-04-04 08:06:29,689 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-04 08:06:32,381 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-04 08:06:32,541 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-04 08:15:49,907 | INFO | fastapi_app | Loading embedding model
+2026-04-04 08:15:57,528 | INFO | fastapi_app | Loading Multimodal CLIP Model for Image Frames
+2026-04-04 08:16:00,290 | INFO | fastapi_app | Qdrant connecting to qdrant:6333
+2026-04-04 08:16:00,473 | INFO | fastapi_app | Qdrant connecting to qdrant:6333

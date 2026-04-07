@@ -16,6 +16,4 @@ async def ingest_link(youtube_link: str):
 
   ingestion_service = IngestionService(youtube_link= youtube_link)
   response = await ingestion_service.process()
-
-
   return response

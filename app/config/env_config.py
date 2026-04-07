@@ -42,5 +42,6 @@ class Settings:
     self.QDRANT_PROTOCOL: str = os.getenv("QDRANT_PROTOCOL")
     self.SEMANTIC_CHUNKING: str = os.getenv("SEMANTIC_CHUNKING")
     self.QDRANT_HYBRID_SEARCH: str = os.getenv("QDRANT_HYBRID_SEARCH")
+    self.OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY")
 
 settings = Settings()
