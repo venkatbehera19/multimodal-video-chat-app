@@ -1,1 +1,261 @@
 2026-04-08 05:32:13,720 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (6046.98ms)
+2026-04-08 06:03:15,011 | ERROR | fastapi_app | Chat Error: Input Conversation History:
+human: what is this video about ?
+ai: Based on the provided video and transcript, this video uses an analogy to explain how Large Language Models (LLMs) work. It illustrates how these models are trained on vast amounts of data to perform tasks like completing sentences, providing advice, or writing poems, while noting that they function differently than human consciousness.
+
+User: what is llm ? is too long for context length 77
+2026-04-08 06:03:15,011 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 500 (1248.29ms)
+2026-04-08 06:06:33,430 | INFO | fastapi_app | video_frames_path {'folder': '/app/app/static/upload/videos/PUB0TaZ7bhA', 'count': 1311, 'sample_image': 'frame_0001.jpg'}
+2026-04-08 06:10:55,033 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (311269.37ms)
+2026-04-08 06:11:05,737 | INFO | fastapi_app | video_frames_path {'folder': '/app/app/static/upload/videos/T9lt6MZKLck', 'count': 197, 'sample_image': 'frame_0001.jpg'}
+2026-04-08 06:11:46,406 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (51369.89ms)
+2026-04-08 06:49:18,826 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.33ms)
+2026-04-08 06:49:19,280 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (1.84ms)
+2026-04-08 07:08:47,619 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.48ms)
+2026-04-08 07:08:47,799 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (3.50ms)
+2026-04-08 07:09:55,327 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.53ms)
+2026-04-08 07:09:55,799 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (8.60ms)
+2026-04-08 07:14:33,040 | ERROR | fastapi_app | 172.18.0.1 - "POST /filepathimages" FAILED (2.55ms)
+Traceback (most recent call last):
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 457, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 706, in solve_dependencies
+    ) = await request_body_to_args(  # body_params checked above
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 973, in request_body_to_args
+    body_to_process = await _extract_form_body(fields_to_extract, received_body)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 936, in _extract_form_body
+    results.append(await sub_value.read())
+                         ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'read'
+2026-04-08 07:14:33,048 | ERROR | fastapi_app | Unhandled exception
+Traceback (most recent call last):
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 191, in __call__
+    with recv_stream, send_stream, collapse_excgroups():
+                                   ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_utils.py", line 87, in collapse_excgroups
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/middleware/log_middleware.py", line 48, in dispatch
+    raise e
+  File "/app/app/middleware/log_middleware.py", line 33, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 660, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 680, in app
+    await route.handle(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/routing.py", line 276, in handle
+    await self.app(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 134, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/app/.venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 120, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/routing.py", line 457, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 706, in solve_dependencies
+    ) = await request_body_to_args(  # body_params checked above
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 973, in request_body_to_args
+    body_to_process = await _extract_form_body(fields_to_extract, received_body)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/.venv/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 936, in _extract_form_body
+    results.append(await sub_value.read())
+                         ^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'read'
+2026-04-08 09:03:03,210 | INFO | fastapi_app | 172.18.0.1 - "GET /docs" 200 (0.34ms)
+2026-04-08 09:03:03,364 | INFO | fastapi_app | 172.18.0.1 - "GET /openapi.json" 200 (3.98ms)
+2026-04-08 09:04:02,129 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (5464.10ms)
+2026-04-08 09:04:59,165 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (16323.69ms)
+2026-04-08 09:15:15,629 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.52ms)
+2026-04-08 09:47:48,660 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.79ms)
+2026-04-08 09:50:46,342 | INFO | fastapi_app | video_frames_path {'folder': '/app/app/static/upload/videos/T9lt6MZKLck', 'count': 197, 'sample_image': 'frame_0001.jpg'}
+2026-04-08 09:51:13,577 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (30181.02ms)
+2026-04-08 09:52:08,001 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (17196.59ms)
+2026-04-08 09:55:33,429 | ERROR | fastapi_app | Chat Error: Input Conversation History:
+human: what is this video about ?
+ai: This video provides an introduction to the concept of trigonometry. It explains that the term comes from Greek words meaning "triangle" and "measure," and defines trigonometry simply as the measurement of all possible aspects of a triangle, such as its angles and side lengths. The video also introduces the right-angled triangle as the primary focus for learning trigonometry.
+
+User: import streamlit as st
+import requests
+import uuid
+
+API_URL = "http://localhost:8000"
+
+st.set_page_config(page_title="Simple Video Chat", layout="wide")
+
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+
+with st.sidebar:
+    st.title("⚙️ Configuration")
+    
+    target_video_id = st.text_input(
+        "Target Video ID", 
+        placeholder="e.g., 67_aMPDk2zw",
+        help="Enter the ID of the video you want to chat with."
+    )
+    
+    st.divider()
+    
+    st.subheader("Process New Video")
+    yt_url = st.text_input("YouTube URL", placeholder="https://www.youtube.com/...")
+    if st.button("Index Video", use_container_width=True):
+        if yt_url:
+            with st.spinner("Indexing..."):
+                try:
+                    response = requests.post(f"{API_URL}/upload", params={"youtube_link": yt_url})
+                    if response.status_code in [200, 201]:
+                        data = response.json()
+                        new_id = data.get("meta") or data.get("video_id")
+                        st.success(f"Indexed! ID: {new_id}")
+                        st.code(new_id) # Easily copy the ID
+                    else:
+                        st.error("Upload failed.")
+                except Exception as e:
+                    st.error(f"Error: {e}")
+
+    if st.button("Clear Chat", use_container_width=True):
+        st.session_state.chat_history = []
+        st.rerun()
+
+st.title("💬 Video Chat")
+if target_video_id:
+    st.caption(f"Active Session: `{st.session_state.session_id}` | Chatting with: `{target_video_id}`")
+else:
+    st.warning("⚠️ Please enter a Video ID in the sidebar to start chatting.")
+
+for chat in st.session_state.chat_history:
+    with st.chat_message(chat["role"]):
+        st.write(chat["content"])
+        if "frames" in chat and chat["frames"]:
+            cols = st.columns(min(len(chat["frames"]), 3))
+            for idx, frame in enumerate(chat["frames"]):
+                with cols[idx % 3]:
+                    b64 = frame["base64"] if isinstance(frame, dict) else frame
+                    st.image(f"data:image/jpeg;base64,{b64}", use_container_width=True)
+
+if prompt := st.chat_input("Ask a question about the video..."):
+    if not target_video_id:
+        st.error("You must provide a Video ID in the sidebar.")
+    else:
+        st.session_state.chat_history.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.write(prompt)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                try:
+                    params = {
+                        "query": prompt,
+                        "session_id": st.session_state.session_id,
+                        "video_id": target_video_id
+                    }
+                    response = requests.get(f"{API_URL}/chat", params=params)
+                    
+                    if response.status_code == 200:
+                        data = response.json()
+                        answer = data.get("answer", "No response.")
+                        frames = data.get("sources", {}).get("frames", [])
+
+                        st.write(answer)
+                        
+                        if frames:
+                            st.markdown("### Visual Evidence")
+                            cols = st.columns(min(len(frames), 3))
+                            for idx, f_data in enumerate(frames):
+                                with cols[idx % 3]:
+                                    st.image(f"data:image/jpeg;base64,{f_data['base64']}", use_container_width=True)
+
+                        st.session_state.chat_history.append({
+                            "role": "assistant", 
+                            "content": answer, 
+                            "frames": frames
+                        })
+                    elif response.status_code == 429:
+                        st.warning("⚠️ **Rate Limit Reached:** Google's free tier has a limit. Please wait about 60 seconds and try again.")
+                        st.session_state.chat_history.pop()
+                    else:
+                        st.error(f"API Error ({response.status_code})")
+                except Exception as e:
+                    st.error(f"Request failed: {e}")
+
+
+lets handle it for the images  is too long for context length 77
+2026-04-08 09:55:33,430 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 500 (821.24ms)
+2026-04-08 10:34:29,807 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (6250.08ms)
+2026-04-08 10:34:29,817 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (2.74ms)
+2026-04-08 10:34:50,293 | ERROR | fastapi_app | Chat Error: Input Conversation History:
+human: what is this video about ?
+ai: The video provides an introduction to the concept of trigonometry. It explains that the term comes from Greek words meaning "triangle" and "measure," and defines trigonometry simply as the measurement of all possible aspects of a triangle, such as its angles and side lengths. The video also introduces the right-angled triangle as the primary focus for learning trigonometry, specifically highlighting the use of an angle referred to as "theta."
+
+User: what is trigonometry ? is too long for context length 77
+2026-04-08 10:34:50,294 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 500 (741.51ms)
+2026-04-08 15:01:31,245 | ERROR | fastapi_app | Chat Error: 'str' object has no attribute 'query_str'
+2026-04-08 15:01:31,246 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 500 (6383.81ms)
+2026-04-08 15:07:10,412 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (4698.05ms)
+2026-04-08 15:07:10,420 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (2.95ms)
+2026-04-08 15:07:45,433 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (11975.06ms)
+2026-04-08 15:07:45,440 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.87ms)
+2026-04-08 15:09:41,971 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (9432.54ms)
+2026-04-08 15:09:41,976 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.53ms)
+2026-04-08 15:10:34,937 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (29184.59ms)
+2026-04-08 15:10:34,942 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.41ms)

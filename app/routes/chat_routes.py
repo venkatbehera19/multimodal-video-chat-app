@@ -9,6 +9,9 @@ from llama_index.core.query_engine import SimpleMultiModalQueryEngine
 from app.llm.gemini_multi_modal import gemini_default_chat_client
 from app.utils.chat_utils import get_base64_image
 from google.api_core import exceptions as google_exceptions
+from pathlib import Path
+import base64
+from llama_index.core import QueryBundle
 
 router = APIRouter(tags=['chat'])
 repo = LammaRepository()
@@ -91,14 +94,18 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
             image_similarity_top_k=3
         )
 
+        nodes = retriever.retrieve(query)
+
+        full_llm_prompt = f"History:\n{history_str}\n\nNew Question: {query}"
+
+        bundle = QueryBundle(query_str=full_llm_prompt)
+
         query_engine = SimpleMultiModalQueryEngine(
             retriever=retriever,
             multi_modal_llm=gemini_default_chat_client
         )
 
-        full_query = f"Conversation History:\n{history_str}\n\nUser: {query}"
-
-        response = query_engine.query(full_query)
+        response = query_engine.synthesize(bundle, nodes)
         history.add_user_message(query)
         history.add_ai_message(response.response)
 
@@ -106,25 +113,22 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
         for node in response.source_nodes:
             if hasattr(node.node, 'image'):
                 file_path = node.node.metadata.get("file_path")
-                b64_img = get_base64_image(file_path)
-                if b64_img:
-                    source_frames.append({
-                        "base64": b64_img,
-                        "file_path": file_path
-                    })
+                source_frames.append({
+                    "file_path": file_path
+                })
 
         return {
-        "answer": response.response,
-        "session_id": session_id,
-        "sources": {
-            "frames": source_frames,
-            "text_snippets": [
-                node.node.text 
-                for node in response.source_nodes 
-                if not hasattr(node.node, 'image')
-            ]
+            "answer": response.response,
+            "session_id": session_id,
+            "sources": {
+                "frames": source_frames,
+                "text_snippets": [
+                    node.node.text 
+                    for node in response.source_nodes 
+                    if not hasattr(node.node, 'image')
+                ]
+            }
         }
-    }
 
     except google_exceptions.ResourceExhausted as e:
         logger.error(f"Quota Exceeded: {str(e)}")

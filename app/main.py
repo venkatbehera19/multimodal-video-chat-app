@@ -7,6 +7,7 @@ from app.exceptions import AppError
 from app.exceptions.handlers import app_error_handler, global_exception_handler
 from app.routes.ingestion_routes import router as ingestion_router
 from app.routes.chat_routes import router as chat_router
+from app.routes.image_routes import router as image_router
 
 app = FastAPI(title="Rag API")
 app.add_exception_handler(AppError, app_error_handler)
@@ -20,3 +21,4 @@ def health():
 
 app.include_router(ingestion_router)
 app.include_router(chat_router)
+app.include_router(image_router)
