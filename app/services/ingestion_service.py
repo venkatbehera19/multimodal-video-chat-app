@@ -70,9 +70,8 @@ class IngestionService:
       frame_input_path=video_frames_path["folder"],
       srt_path= youtube_file["subtitles"]
     )
-    logger.info(f"RESULT {res}")
-
     return {
       "status": "completed",
-      "message": "Data indexed and local storage cleared."
+      "message": "Data indexed and local storage cleared.",
+      "meta": youtube_file["meta"]["id"]
     }

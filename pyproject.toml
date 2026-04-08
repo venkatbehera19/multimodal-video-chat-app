@@ -8,6 +8,7 @@ dependencies = [
     "clip",
     "fastapi>=0.135.2",
     "google-generativeai>=0.8.6",
+    "langchain-community>=0.4.1",
     "llama-index>=0.14.20",
     "llama-index-embeddings-clip>=0.6.0",
     "llama-index-multi-modal-llms-gemini>=0.6.1",

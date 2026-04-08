@@ -4,7 +4,7 @@ from enum import Enum
 
 class GEMINI_CHAT_MODEL(Enum):
   """Gemini chat model configuration"""
-  MODEL_NAME = "gemini-3-flash-preview"
+  MODEL_NAME = "gemini-3.1-flash-lite-preview"
   TEMPERATURE = 0.0
 
 class GROQ_CHAT_MODEL(Enum):

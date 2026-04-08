@@ -3,13 +3,12 @@ from fastapi import APIRouter, status, Query, HTTPException
 from app.config.env_config import settings
 from app.config.log_config import logger
 from app.prompt.retrival_system_prompt import RAG_SYSTEM_PROMPT_TEXT
-# from app.llm.groq_chat_client import default_chat_client
-# from app.utils.redis_utils import redis_history
+from app.utils.redis_utils import redis_history
 from app.repository.lamma_repo import LammaRepository
-from llama_index.core.response_synthesizers import TreeSummarize
 from llama_index.core.query_engine import SimpleMultiModalQueryEngine
 from app.llm.gemini_multi_modal import gemini_default_chat_client
-
+from app.utils.chat_utils import get_base64_image
+from google.api_core import exceptions as google_exceptions
 
 router = APIRouter(tags=['chat'])
 repo = LammaRepository()
@@ -81,7 +80,9 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
 #         error_msg = str(e)
 #         logger.error(f"Chain error: {error_msg}")
     try:
-        
+        history = redis_history.get_redis_history(session_id)
+        existing_messages = history.messages
+        history_str = "\n".join([f"{msg.type}: {msg.content}" for msg in existing_messages[-6:]])
         if not index:
             raise HTTPException(status_code=404, detail="Video index not found. Process the video first.")
         
@@ -95,17 +96,28 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
             multi_modal_llm=gemini_default_chat_client
         )
 
-        response = query_engine.query(query)
+        full_query = f"Conversation History:\n{history_str}\n\nUser: {query}"
+
+        response = query_engine.query(full_query)
+        history.add_user_message(query)
+        history.add_ai_message(response.response)
+
+        source_frames = []
+        for node in response.source_nodes:
+            if hasattr(node.node, 'image'):
+                file_path = node.node.metadata.get("file_path")
+                b64_img = get_base64_image(file_path)
+                if b64_img:
+                    source_frames.append({
+                        "base64": b64_img,
+                        "file_path": file_path
+                    })
 
         return {
         "answer": response.response,
         "session_id": session_id,
         "sources": {
-            "frames": [
-                node.node.metadata.get("file_path") 
-                for node in response.source_nodes 
-                if hasattr(node.node, 'image')
-            ],
+            "frames": source_frames,
             "text_snippets": [
                 node.node.text 
                 for node in response.source_nodes 
@@ -113,6 +125,13 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
             ]
         }
     }
+
+    except google_exceptions.ResourceExhausted as e:
+        logger.error(f"Quota Exceeded: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail="Gemini API quota exceeded. Please wait a moment before trying again."
+        )
 
     except Exception as e:
         logger.error(f"Chat Error: {str(e)}")
