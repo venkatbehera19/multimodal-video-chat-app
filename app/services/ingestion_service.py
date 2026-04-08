@@ -1,8 +1,5 @@
-import yt_dlp
 import os
-import subprocess
-import webvtt
-from fastapi import status
+import time
 
 from app.config.env_config import settings
 from app.config.log_config import logger
@@ -51,27 +48,45 @@ class IngestionService:
     Multimodal Ingestion Pipeline:
     Downloads, parses, embeds, and indexes video (visuals) and audio (subtitles/transcript).
     """
-
+    pipeline_start = time.time()
+    start = time.time()
     youtube_service = YoutubeService(self.youtube_link)
     youtube_file = youtube_service.download_file(self.video_dir)
+    download_time = time.time() - start
+    logger.info(f"✅ Download completed in {download_time:.2f}s")
     if not youtube_file:
       logger.info("File Not downloaded")
       return None
 
+    start = time.time()
     vp = VideoProcessing(youtube_file['video'])
     video_frames_path = vp.process_video_frames()
-    logger.info(f"video_frames_path {video_frames_path}")
+    frames_time = time.time() - start
+    logger.info(f"✅ Frame extraction completed in {frames_time:.2f}s")
     if not video_frames_path:
       logger.info("Can Not Process Frames")
       return None
   
     lr = LammaRepository()
+    logger.info(f"🔍 Starting Qdrant Indexing...")
+    start = time.time()
     res = lr.add_data_to_qdrant(
       frame_input_path=video_frames_path["folder"],
       srt_path= youtube_file["subtitles"]
     )
+    indexing_time = time.time() - start
+    logger.info(f"✅ Indexing completed in {indexing_time:.2f}s")
+
+    total_time = time.time() - pipeline_start
+    logger.info(f"🏁 TOTAL PIPELINE TIME: {total_time:.2f}s")
     return {
       "status": "completed",
       "message": "Data indexed and local storage cleared.",
-      "meta": youtube_file["meta"]["id"]
+      "meta": youtube_file["meta"]["id"],
+      "timing": {
+        "download": f"{download_time:.2f}s",
+        "frames": f"{frames_time:.2f}s",
+        "indexing": f"{indexing_time:.2f}s",
+        "total": f"{total_time:.2f}s"
+      }
     }

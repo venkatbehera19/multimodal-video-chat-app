@@ -259,3 +259,11 @@ User: what is trigonometry ? is too long for context length 77
 2026-04-08 15:09:41,976 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.53ms)
 2026-04-08 15:10:34,937 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (29184.59ms)
 2026-04-08 15:10:34,942 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (1.41ms)
+2026-04-08 15:33:54,241 | INFO | fastapi_app | ✅ Download completed in 1.87s
+2026-04-08 15:33:54,667 | INFO | fastapi_app | ✅ Frame extraction completed in 0.43s
+2026-04-08 15:33:58,343 | INFO | fastapi_app | 🔍 Starting Qdrant Indexing...
+2026-04-08 15:34:20,281 | INFO | fastapi_app | ✅ Indexing completed in 21.94s
+2026-04-08 15:34:20,281 | INFO | fastapi_app | 🏁 TOTAL PIPELINE TIME: 27.91s
+2026-04-08 15:34:20,297 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (27923.59ms)
+2026-04-08 15:39:21,726 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (12275.27ms)
+2026-04-08 15:39:21,732 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (2.32ms)
