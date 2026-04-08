@@ -53,13 +53,16 @@ class LammaRepository:
             vector_store=self.text_store
         )
 
-    def add_data_to_qdrant(self, frame_input_path:str, srt_path: str):
+    def add_data_to_qdrant(self, frame_input_path:str, srt_path: str, video_id: str):
         
         image_docs = SimpleDirectoryReader(
             input_dir=frame_input_path,
             file_extractor={".jpg": ImageReader(), ".png": ImageReader(), ".jpeg": ImageReader()},
             recursive=True
         ).load_data()
+
+        for doc in image_docs:
+            doc.metadata["video_id"] = video_id
 
         srt_docs = SimpleDirectoryReader(
             input_files=[srt_path],
@@ -69,6 +72,8 @@ class LammaRepository:
 
         splitter = TokenTextSplitter(chunk_size=300, chunk_overlap=50)
         srt_nodes = splitter.get_nodes_from_documents(srt_docs)
+        for node in srt_nodes:
+            node.metadata["video_id"] = video_id
         all_docs = image_docs + srt_nodes
 
         index = MultiModalVectorStoreIndex.from_documents(

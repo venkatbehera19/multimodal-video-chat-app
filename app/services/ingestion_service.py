@@ -52,6 +52,8 @@ class IngestionService:
     start = time.time()
     youtube_service = YoutubeService(self.youtube_link)
     youtube_file = youtube_service.download_file(self.video_dir)
+    v_id = youtube_file["meta"]["id"] 
+    logger.info(f"Processing Video ID: {v_id}")
     download_time = time.time() - start
     logger.info(f"✅ Download completed in {download_time:.2f}s")
     if not youtube_file:
@@ -70,9 +72,10 @@ class IngestionService:
     lr = LammaRepository()
     logger.info(f"🔍 Starting Qdrant Indexing...")
     start = time.time()
-    res = lr.add_data_to_qdrant(
+    lr.add_data_to_qdrant(
       frame_input_path=video_frames_path["folder"],
-      srt_path= youtube_file["subtitles"]
+      srt_path= youtube_file["subtitles"],
+      video_id=v_id
     )
     indexing_time = time.time() - start
     logger.info(f"✅ Indexing completed in {indexing_time:.2f}s")
@@ -82,7 +85,7 @@ class IngestionService:
     return {
       "status": "completed",
       "message": "Data indexed and local storage cleared.",
-      "meta": youtube_file["meta"]["id"],
+      "meta": v_id,
       "timing": {
         "download": f"{download_time:.2f}s",
         "frames": f"{frames_time:.2f}s",

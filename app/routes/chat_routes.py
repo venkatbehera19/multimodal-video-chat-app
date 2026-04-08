@@ -9,9 +9,9 @@ from llama_index.core.query_engine import SimpleMultiModalQueryEngine
 from app.llm.gemini_multi_modal import gemini_default_chat_client
 from app.utils.chat_utils import get_base64_image
 from google.api_core import exceptions as google_exceptions
-from pathlib import Path
-import base64
+import time
 from llama_index.core import QueryBundle
+from llama_index.core.vector_stores import MetadataFilters, ExactMatchFilter
 
 router = APIRouter(tags=['chat'])
 repo = LammaRepository()
@@ -19,6 +19,7 @@ index = repo.get_index()
 
 @router.get('/chat', status_code=status.HTTP_200_OK)
 async def chat(query: str, session_id: str, video_id: str = Query(..., description="The ID of the video to query")):
+    chat_start_time = time.time()
 # async def chat(query: str, session_id: str, link: str = Query(..., description="The processed video link")):
 #     """ Chat Methods for llm response
 
@@ -86,16 +87,25 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
         history = redis_history.get_redis_history(session_id)
         existing_messages = history.messages
         history_str = "\n".join([f"{msg.type}: {msg.content}" for msg in existing_messages[-6:]])
+
         if not index:
             raise HTTPException(status_code=404, detail="Video index not found. Process the video first.")
         
+        search_start = time.time()
+        filters = MetadataFilters(
+            filters=[ExactMatchFilter(key="video_id", value=video_id)]
+        )
         retriever = index.as_retriever(
+            filters = filters,
             similarity_top_k=3, 
             image_similarity_top_k=3
         )
 
         nodes = retriever.retrieve(query)
+        search_duration = time.time() - search_start
+        logger.info(f"🔍 Search/Retrieval completed in {search_duration:.2f}s")
 
+        synth_start = time.time()
         full_llm_prompt = f"History:\n{history_str}\n\nNew Question: {query}"
 
         bundle = QueryBundle(query_str=full_llm_prompt)
@@ -106,8 +116,14 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
         )
 
         response = query_engine.synthesize(bundle, nodes)
+        synth_duration = time.time() - synth_start
+        logger.info(f"🤖 LLM Synthesis completed in {synth_duration:.2f}s")
+
         history.add_user_message(query)
         history.add_ai_message(response.response)
+
+        total_duration = time.time() - chat_start_time
+        logger.info(f"✅ Total Chat Response Time: {total_duration:.2f}s")
 
         source_frames = []
         for node in response.source_nodes:
@@ -120,6 +136,11 @@ async def chat(query: str, session_id: str, video_id: str = Query(..., descripti
         return {
             "answer": response.response,
             "session_id": session_id,
+            "timing": {
+                "search": f"{search_duration:.2f}s",
+                "synthesis": f"{synth_duration:.2f}s",
+                "total": f"{total_duration:.2f}s"
+            },
             "sources": {
                 "frames": source_frames,
                 "text_snippets": [

@@ -267,3 +267,17 @@ User: what is trigonometry ? is too long for context length 77
 2026-04-08 15:34:20,297 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (27923.59ms)
 2026-04-08 15:39:21,726 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (12275.27ms)
 2026-04-08 15:39:21,732 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (2.32ms)
+2026-04-08 16:27:14,417 | INFO | fastapi_app | Processing Video ID: ad79nYk2keg
+2026-04-08 16:27:14,417 | INFO | fastapi_app | ✅ Download completed in 4.68s
+2026-04-08 16:27:15,876 | INFO | fastapi_app | ✅ Frame extraction completed in 1.46s
+2026-04-08 16:27:20,976 | INFO | fastapi_app | 🔍 Starting Qdrant Indexing...
+2026-04-08 16:28:07,084 | INFO | fastapi_app | ✅ Indexing completed in 46.11s
+2026-04-08 16:28:07,085 | INFO | fastapi_app | 🏁 TOTAL PIPELINE TIME: 57.34s
+2026-04-08 16:28:07,102 | INFO | fastapi_app | 172.18.0.1 - "POST /upload" 201 (57360.88ms)
+2026-04-08 16:40:03,086 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (6594.92ms)
+2026-04-08 16:40:03,093 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (3.42ms)
+2026-04-08 16:48:09,975 | INFO | fastapi_app | 🔍 Search/Retrieval completed in 0.78s
+2026-04-08 16:48:22,589 | INFO | fastapi_app | 🤖 LLM Synthesis completed in 12.61s
+2026-04-08 16:48:22,590 | INFO | fastapi_app | ✅ Total Chat Response Time: 13.39s
+2026-04-08 16:48:22,591 | INFO | fastapi_app | 172.18.0.1 - "GET /chat" 200 (13394.42ms)
+2026-04-08 16:48:22,599 | INFO | fastapi_app | 172.18.0.1 - "POST /filepathimages" 200 (4.08ms)
